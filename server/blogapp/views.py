@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView , RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Blog
 from .serializers import CustomUserSerializer, BlogSerializer, ProfileUpdateSerializer
@@ -62,3 +64,11 @@ class BlogGetView(RetrieveAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
     lookup_field = 'slug'
+
+class GetUsernameView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        username = user.username
+        return Response({'username': username})

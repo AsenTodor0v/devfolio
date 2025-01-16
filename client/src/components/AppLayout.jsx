@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
 import Footer from "./Footer"
 import NavBar from "./NavBar"
 import { useEffect, useState } from "react"
 
 
-const AppLayOut = () => {
+const AppLayOut = ({ isAuthenticated, setIsAuthenticated, setUsername, username }) => {
     const [darkMode, setDarkMode] = useState(localStorage.getItem('dark') === 'true')
 
     const toggleDarkMode = () => {
@@ -22,7 +23,8 @@ const AppLayOut = () => {
     return (
         <div className={darkMode ? 'dark' : ''}>
             <main className="w-full bg-[#ffffff] dark:bg-[#141624]">
-                <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+                <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} username={username} />
+                <ToastContainer />
                 <Outlet />
                 <Footer />
             </main>
