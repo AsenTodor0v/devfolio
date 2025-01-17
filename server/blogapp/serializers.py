@@ -33,4 +33,4 @@ class BlogSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
     class Meta:
         model = Blog
-        fields = '__all__'
+        fields = ['id', 'title', 'slug', 'author', 'author_id', 'category', 'content', 'featured_image', 'published_time', 'created_at', 'updated_at', 'is_draft']

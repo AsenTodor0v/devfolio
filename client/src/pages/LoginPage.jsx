@@ -30,10 +30,9 @@ const LoginPage = ({ setIsAuthenticated, setUsername }) => {
         }
     })
 
-    function onSubmit(data) {
-        console.log(data)
+    const onSubmit = (data) => {
         mutation.mutate(data)
-    };
+    }
 
     return (
         <form

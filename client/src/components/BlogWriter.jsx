@@ -10,7 +10,7 @@ const BlogWriter = ({ blog }) => {
             <span className="flex items-center gap-2">
                 <div className="w-[40px] h-[40px] rounded-full overflow-hidden">
                     <img
-                        src={`${BASE_URL}${blog.author.profile_picture}`}
+                        src={`${blog.author.profile_picture}`}
                         className="c rounded-full w-full h-full object-cover"
                     />
                 </div>
