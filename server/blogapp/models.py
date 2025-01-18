@@ -11,6 +11,9 @@ from .choises import BlogChoices
 class CustomUser(AbstractUser):
     bio = models.TextField(blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_img', blank=True, null=True)
+    profile_picture_url = models.URLField(blank=True, null=True)
+    job_title = models.CharField(max_length=50, blank=True, null=True)
+    
     facebook = models.URLField(blank=True, null=True)
     youtube = models.URLField(blank=True, null=True)
     instagram = models.URLField(blank=True, null=True)

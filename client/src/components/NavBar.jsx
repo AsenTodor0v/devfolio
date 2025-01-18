@@ -22,7 +22,9 @@ const NavBar = ({ darkMode, toggleDarkMode, isAuthenticated, setIsAuthenticated,
                 <ul className="flex items-center  justify-end gap-9 text-[#2a2a32] lg:flex-1 max-md:hidden dark:text-[#FFFFFF]">
 
                     {isAuthenticated ? <>
-                        <li>Hi, {username}</li>
+                        <li>
+                            <NavLink className={({ isActive }) => isActive ? "active" : ""} to={`profile/${username}`}>{username}</NavLink>
+                        </li>
                         <li onClick={logout} className="cursor-pointer">Logout</li>
                     </> :
                         <>

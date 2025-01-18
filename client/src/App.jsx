@@ -10,8 +10,7 @@ import LoginPage from "./pages/LoginPage"
 import ProtectedRoute from "./components/ProtectedRoute"
 import { useEffect, useState } from "react"
 import { getUsername } from "./services/apiBlog"
-
-
+import RedirectLogedIn from "./components/RedirectLogedIn"
 
 export default function Home() {
   const [username, setUsername] = useState(null);
@@ -34,10 +33,10 @@ export default function Home() {
         <Route path="/" element={<AppLayout isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} username={username} />}>
           <Route index element={<HomePage />} />
           <Route path="blogs/:slug" element={<DetailPage username={username} isAuthenticated={isAuthenticated} />} />
-          <Route path="signup" element={<SignUpPage />} />
-          <Route path="login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
+          <Route path="signup" element={<RedirectLogedIn isAuthenticated={isAuthenticated}><SignUpPage /> </RedirectLogedIn>} />
+          <Route path="login" element={<RedirectLogedIn isAuthenticated={isAuthenticated}><LoginPage setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} /></RedirectLogedIn>} />
           <Route path="create" element={<ProtectedRoute><CreatePostPage isAuthenticated={isAuthenticated} /></ProtectedRoute>} />
-          {/*<Route path="profile" element={<ProfilePage />} /> */}
+          <Route path="profile/:username" element={<ProfilePage authUsername={username} />} />
         </Route>
       </Routes>
     </BrowserRouter>

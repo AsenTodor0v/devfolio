@@ -84,3 +84,24 @@ export async function deleteBlog(id) {
         throw new Error(error.message);
     }
 }
+
+export async function getUserInfo(username) {
+    try {
+        const response = await api.get(`get_userinfo/${username}`)
+        return response.data
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export async function updateUserInfo(data) {
+    try {
+        const response = await api.put(`update_user/`, data)
+        return response.data
+    } catch (error) {
+        if (error.response) {
+            throw new Error(error.response?.data.message || 'Something went wrong');
+        }
+        throw new Error(error.message);
+    }
+}

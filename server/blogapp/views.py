@@ -1,12 +1,14 @@
-from django.shortcuts import render
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView , RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+
+from django.contrib.auth import get_user_model
 
 from .models import Blog
-from .serializers import CustomUserSerializer, BlogSerializer, ProfileUpdateSerializer
+from .serializers import CustomUserSerializer, BlogSerializer, ProfileUpdateSerializer, UserInfoSerializer
 from .permissions import IsOwner
 # Create your views here.
 
@@ -72,3 +74,11 @@ class GetUsernameView(APIView):
         user = request.user
         username = user.username
         return Response({'username': username})
+    
+
+@api_view(['GET'])
+def get_userinfo(request, username):
+    User = get_user_model()
+    user = User.objects.get(username=username)
+    serializer = UserInfoSerializer(user)
+    return Response(serializer.data)
